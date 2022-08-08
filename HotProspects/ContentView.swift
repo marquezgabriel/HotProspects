@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  HotProspects
 //
-//  Created by Gabriel Marquez on 2022-08-04.
+//  Created by Gabriel Marquez on 2022-08-08.
 //
 
 import SwiftUI
@@ -11,28 +11,22 @@ struct ContentView: View {
     @State private var backgroundColor = Color.red
 
     var body: some View {
-        VStack {
-            Text("Hello, World!")
-                .padding()
-                .background(backgroundColor)
-
-            Text("Change Color")
-                .padding()
-                .contextMenu {
+        List {
+            Text("Taylor Swift")
+                .swipeActions {
                     Button(role: .destructive) {
-                        backgroundColor = .red
+                        print("Hi")
                     } label: {
-                        Label("Red", systemImage: "checkmark.circle.fill")
-                            .foregroundColor(.red)
+                        Label("Delete", systemImage: "minus.circle")
                     }
-
-                    Button("Green") {
-                        backgroundColor = .green
+                }
+                .swipeActions(edge: .leading) {
+                    Button {
+                        print("Hi")
+                    } label: {
+                        Label("Pin", systemImage: "pin")
                     }
-
-                    Button("Blue") {
-                        backgroundColor = .blue
-                    }
+                    .tint(.orange)
                 }
         }
     }
