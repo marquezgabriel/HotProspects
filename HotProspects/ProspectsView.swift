@@ -23,11 +23,18 @@ struct ProspectsView: View {
         NavigationView {
             List {
                 ForEach(filteredProspects) { prospect in
-                    VStack(alignment: .leading) {
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        if prospect.isContacted && filter == .none {
+                            Spacer()
+                            Image(systemName: "checkmark.circle.fill")
+                        }
                     }
                     .swipeActions {
                         if prospect.isContacted {
@@ -64,7 +71,7 @@ struct ProspectsView: View {
                     }
                 }
                 .sheet(isPresented: $isShowingScanner) {
-                    CodeScannerView(codeTypes: [.qr], simulatedData: "Gabriel Marquez\ngabriel@marquezgabriel.com", completion: handleScan)
+                    CodeScannerView(codeTypes: [.qr], simulatedData: "Gabriel Marquez\nmarquezgabriel.com", completion: handleScan)
                 }
         }
     }
